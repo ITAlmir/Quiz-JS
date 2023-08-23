@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+  <header>
+    <h1>Welcome Traveler</h1>
+  </header> 
+  <section class="questions" id="quiz-container">
+    <h1 id="question">Hello Traveler ! </h1>
+    <form>
+      <ul id="options">
+        <li>Start game?</li>
+      </ul>
+        <input class="formSubmiter hidden" id="formSubmiter" type="button" value="Submit">
+      </form>
+      <button class="battleButton">Head into battle!</button>
+      <button class="newGameButton"  onclick="newGame()">New Game !</button>
+  </section> 
+  <p class="highlight hidden" id="highlight">You need to answer the current question to make progress</p>
+  <section class="levels">
+  </section>
+  <div class="custom-hr"></div>
+  <div class="background-image">
+    </div>
+    <script src="externalFile.js"></script>
+</body>
+</html>
