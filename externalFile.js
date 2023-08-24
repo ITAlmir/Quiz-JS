@@ -49,7 +49,8 @@ var questions = [
 ];
 //inserting Level buttons and starting new game
 const levelsContainer = document.querySelector('.levels');
-var gameProgress = 0;
+let gameProgress = 0;
+let hihglightText = "";
 function newGame(){
     gameProgress = 0;
     const el = document.getElementById("formSubmiter");
@@ -108,18 +109,52 @@ function handleClick(event) {
     const box = document.getElementById(buttonId);
     console.log("Clicked button ID:", buttonId);
     if(buttonId >= gameProgress){
+        hihglightText = "You need to answer the current question to make progress";
+        noProgress(hihglightText);
+    }else{
+        displayQuestion(buttonId);
+        gameProgress = buttonId;
+        box.style.backgroundColor="darkblue";
+    }
+}
+function handleAutoClick(event) {
+    const buttonId = event;
+    const box = document.getElementById(buttonId);
+    console.log("Clicked button ID:", buttonId);
+    if(buttonId >= gameProgress+1){
         noProgress();
     }else{
         displayQuestion(buttonId);
         box.style.backgroundColor="darkblue";
     }
 }
-function noProgress(){
+function noProgress(hihglightText){
     const highlightedElements = document.getElementById("highlight");
-
+        highlightedElements.innerHTML = hihglightText;
         highlightedElements.classList.remove("hidden");
         setTimeout(() => {
             highlightedElements.classList.add("hidden");
-        }, 5000);
+        }, 3000);
 }
-
+function checkAnswer() {
+    const correctAnswer = questions[gameProgress].answer;
+    const selectedAnswer = document.querySelector('input[name="options"]:checked');
+    if(gameProgress < 8){
+    if (selectedAnswer) {
+        if (selectedAnswer.parentElement.textContent === correctAnswer) {
+            gameProgress++;   
+            handleAutoClick(gameProgress);
+            displayQuestion(gameProgress);
+        } else {
+            hihglightText = "Wrong answer!";
+            noProgress(hihglightText);
+        }
+    } else {
+        hihglightText = "Please select an answer !";
+            noProgress(hihglightText);
+    }
+    }else{
+        hihglightText = "Congratulation ! You Won!";
+            noProgress(hihglightText);
+    }
+}
